@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+   <div class="about">
+     <h2>About me</h2>
+     <p>Hello! <br> <br>
+My name is Nicholas Rasmussen. I am a final year Master’s of Applied Science candidate in Chemical Engineering at the University of Waterloo.
+         My research thesis is designing and modelling a hydrogel based photobioreactor with terrestrial and microgravity applications.
+         My thesis was conducted in conjunction with a Canadian Space Agency design challenge jointly held with NASA.
+         <a href="https://impact.canada.ca/en/challenges/deep-space-food-challenge" style="color:blue;text-decoration:underline;">The Deep Space Food challenge</a>
+         aimed to develop novel technologies to address food needs in future long term space activities and exploration.
+         On a team with my supervisors Valerie Ward and Nasser Abukdeir, we were
+         <a href="https://uwaterloo.ca/chemical-engineering/news/chemical-engineering-team-semi-finalists-deep-space-food" style="color:blue;text-decoration:underline;">semi-finalists</a>
+         in the competition.
+     </p>
+       <p> I graduated in 2022 with a Bachelor of Applied Science, honours chemical engineering from the University of Waterloo.
+           I finished my cooperative degree with 2 years of industry experience, a materials and manufacturing process specialization, and a management sciences option.
+           I graduated with distinction on the Dean’s Honours List with a cumulative GPA of 91.10%. In my final year of study, my team was awarded the capstone design award for best overall project.
+           Our project was the design of a solvent-based recycling process for multilayer plastic films like plastic food pouches made form polyethylene and PET.
+       </p>
+       <img id="selfie" src="/static/IMG_3740.jpg" alt="Profile Picture" class="center">
+       <h3><a href="{{ url_for('resume') }}" style="color:black;">My Resume </a></h3>
+   </div>
+ {% endblock %}

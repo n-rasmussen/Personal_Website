@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+   <div class="knn">
+     <h2>Movie recommender using K-Nearest Neighbours</h2>
+     <p>Using functions, k-nearest neighbours was implemented to make movie recommendation based off similar movie ratings.
+       Before building the kNN recommender, recommendations were considered using the best rated movies on average from all users.
+         The first step in the project was to load and manipulate the data so that each movie had an average rating based off the dataset.
+     </p>
+       <p> Movies Dataframe: </p>
+       <img src="/static/movies_dataframe.jpg" alt="Movies Dataframe" style="width:50%" class="center">
+       <p> Ratings Dataframe: </p>
+       <img src="/static/ratings_dataframe.jpg" alt="Ratings Dataframe" style="width:40%" class="center">
+       <p> Top rated movies sorted by number of ratings, and then by average ratings: </p>
+       <img src="/static/best_overall_movies.jpg" alt="Top Movies on Average" style="width:70%" class="center">
+       <p>
+       However, the most popular movies on average may not be the best recommendation. As such K-nearest neighbours (kNN)
+           was implemented to find recommendations based of what similar users liked.
+           K-nearest neighbours is an unsupervised method to find similar datapoints based of the assumption that if two datapoints have similar feature vectors, then the datapoints are likely to have the same label.
+
+This model is non-parametric. As such the time complexity of training is 0, and the space complexity is O(nd).
+           However, the classification of a point is O(ndk) and O(nd) in space. where d is number of features, n number of datapoints, and k is the number of neighbours.
+           K is a hyperparameter of the model. This model can be used for classification when given labelled data.
+       </p>
+       <p> Result of KNN </p>
+       <img id="scored" src="/static/kNN.jpg" alt="Results of kNN model" style="width:70%" class="center">
+
+
+       <h3>Source Code:</h3>
+       <p> <a href="https://github.com/n-rasmussen/Machine-Learning-Models/blob/main/K_Nearest_Neighbors.ipynb" style="color:black; text-decoration:underline;">Github Repository</a> </p>
+
+   </div>
+
+ {% endblock %}

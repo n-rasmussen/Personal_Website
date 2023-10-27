@@ -1,0 +1,223 @@
+{% extends "layout.html" %}
+{% block content %}
+   <div class="regression">
+     <h2>Movie Rating Predictor using Regularized Regression</h2>
+     <p>Using sckit-learn and pandas dataframes, regression models were built to predict a user's movie rating based of user characteristics like age,
+       occupation, and movie genre for example. In this project I explore the role of regularization in multiple linear regression models. <br>  <br>
+
+       Regression can be a powerful tool to gain insight from labelled data. However, in multiple linear regression, curtain features may be highly correlated leading to overfitting
+       to the training set. In such cases regularization may be used to improve the generality of the model. <br> <br>
+       The objective function for training any model is to minimize the loss over the training dataset
+     </p>
+     <math display="block" class="tml-display" style="display:block math;">
+  <mrow>
+    <mrow>
+      <mi>arg</mi>
+      <mo>⁡</mo>
+      <mspace width="0.1667em"></mspace>
+    </mrow>
+    <munder>
+      <mi>min</mi>
+      <mi>w</mi>
+    </munder>
+    <mo>⁡</mo>
+    <mspace width="0.1667em"></mspace>
+    <mfrac>
+      <mn>1</mn>
+      <mi>n</mi>
+    </mfrac>
+    <mrow>
+      <munderover>
+        <mo movablelimits="false">∑</mo>
+        <mrow>
+          <mi>i</mi>
+          <mo>=</mo>
+          <mn>1</mn>
+        </mrow>
+        <mi>n</mi>
+      </munderover>
+    </mrow>
+    <msub>
+      <mi>ℓ</mi>
+      <mi>w</mi>
+    </msub>
+    <mo form="prefix" stretchy="false">(</mo>
+    <msub>
+      <mi>x</mi>
+      <mi>i</mi>
+    </msub>
+    <mo separator="true">,</mo>
+    <msub>
+      <mi>y</mi>
+      <mi>i</mi>
+    </msub>
+    <mo form="postfix" stretchy="false">)</mo>
+  </mrow>
+</math>
+<p> For linear regression the loss function is:</p>
+       <math display="block" class="tml-display" style="display:block math;">
+  <mrow>
+    <msub>
+      <mi>ℓ</mi>
+      <mi>w</mi>
+    </msub>
+    <mo form="prefix" stretchy="false">(</mo>
+    <msub>
+      <mi>x</mi>
+      <mi>i</mi>
+    </msub>
+    <mo separator="true">,</mo>
+    <msub>
+      <mi>y</mi>
+      <mi>i</mi>
+    </msub>
+    <mo form="postfix" stretchy="false">)</mo>
+    <mo>=</mo>
+    <mo form="prefix" stretchy="false">(</mo>
+    <mi>y</mi>
+    <mo>−</mo>
+    <mo form="prefix" stretchy="false">⟨</mo>
+    <mi>w</mi>
+    <mo separator="true">,</mo>
+    <mi>x</mi>
+    <mo form="postfix" stretchy="false">⟩</mo>
+    <msup>
+      <mo form="postfix" stretchy="false">)</mo>
+      <mn>2</mn>
+    </msup>
+    <mo>=</mo>
+    <mo form="prefix" stretchy="false">‖</mo>
+    <mi>A</mi>
+    <mi>w</mi>
+    <mo>−</mo>
+    <mi>z</mi>
+    <msubsup>
+      <mo form="postfix" stretchy="false">‖</mo>
+      <mn>2</mn>
+      <mn>2</mn>
+    </msubsup>
+  </mrow>
+</math>
+
+       <p> Regularization can help improve the performance of a model by reducing the influence of individual features on overall model. <br>  <br>
+Ridge regression (Tikhonov regularization, or L2 regularization) uses a hyperparameter α to penalize the weight assigned in the model to any one feature. the loss function for this technique is:</p>
+
+<math display="block" class="tml-display" style="display:block math;">
+  <mrow>
+    <msub>
+      <mi>ℓ</mi>
+      <mi>w</mi>
+    </msub>
+    <mo form="prefix" stretchy="false">(</mo>
+    <msub>
+      <mi>x</mi>
+      <mi>i</mi>
+    </msub>
+    <mo separator="true">,</mo>
+    <msub>
+      <mi>y</mi>
+      <mi>i</mi>
+    </msub>
+    <mo form="postfix" stretchy="false">)</mo>
+    <mo>=</mo>
+    <mo form="prefix" stretchy="false">‖</mo>
+    <mi>A</mi>
+    <mi>w</mi>
+    <mo>−</mo>
+    <mi>z</mi>
+    <msubsup>
+      <mo form="postfix" stretchy="false">‖</mo>
+      <mn>2</mn>
+      <mn>2</mn>
+    </msubsup>
+    <mo>+</mo>
+    <mi>λ</mi>
+    <mo form="prefix" stretchy="false">‖</mo>
+    <mi>w</mi>
+    <msubsup>
+      <mo form="postfix" stretchy="false">‖</mo>
+      <mn>2</mn>
+      <mn>2</mn>
+    </msubsup>
+    <msub>
+</math>
+
+       <P>
+Lasso regression (L1 regularization) is another technique to reduce the weights of any individual feature. However,
+           lasso regression tends to favour sparse solutions allowing the feature space to be reduced for the model. the loss function for this model is:
+       </P>
+<math display="block" class="tml-display" style="display:block math;">
+  <mrow>
+    <msub>
+      <mi>ℓ</mi>
+      <mi>w</mi>
+    </msub>
+    <mo form="prefix" stretchy="false">(</mo>
+    <msub>
+      <mi>x</mi>
+      <mi>i</mi>
+    </msub>
+    <mo separator="true">,</mo>
+    <msub>
+      <mi>y</mi>
+      <mi>i</mi>
+    </msub>
+    <mo form="postfix" stretchy="false">)</mo>
+    <mo>=</mo>
+    <mo form="prefix" stretchy="false">‖</mo>
+    <mi>A</mi>
+    <mi>w</mi>
+    <mo>−</mo>
+    <mi>z</mi>
+    <msubsup>
+      <mo form="postfix" stretchy="false">‖</mo>
+      <mn>2</mn>
+      <mn>2</mn>
+    </msubsup>
+    <mo>+</mo>
+    <mi>λ</mi>
+    <mo form="prefix" stretchy="false">‖</mo>
+    <mi>w</mi>
+    <msub>
+      <mo form="postfix" stretchy="false">‖</mo>
+      <mn>1</mn>
+    </msub>
+  </mrow>
+</math>
+
+       <p> Movie Ratings Dataframe </p>
+       <img src="/static/reg_ratings_df.jpg" alt="Ratings Dataframe" style="width:40%" class="center">
+       <p> Movie Features Dataframe: </p>
+       <img src="/static/reg_movies_df.jpg" alt="Movies Dataframe" style="width:80%" class="center">
+       <p> Users Features Dataframe: </p>
+       <img src="/static/reg_users_df.jpg" alt="Top Movies on Average" style="width:40%" class="center">
+       <p>
+      Using Pandas, the Movie features and user features dataframes were merged to get the complete feature vectors for the model.
+         One hot encoding was used to convert categorical data to numerical data for the regression model
+       </p>
+     <img src="/static/reg_merged_df.jpg" alt="Feature vectors" style="width:80%" class="center">
+
+
+       <p> The following Models presented were trained on the same train/test split. Seaborn was used to visual the results of the model. <br> <br>
+         The linear model achieved a mean squared error on the test set of 1.1954598871852038.
+       </p>
+      <img id="scored3" src="/static/reg_linear_bar.png" alt="ridge model parameters" style="width:60%" class="center">
+     <p>
+     Ridge regression was tested next. The hyperparameter alpha was tested with grid search cross validation in the range of 1e-5 to 90. The optimal alpha value was then used to train the model.
+       the mean squared error on the test set was 1.1954598871973383. The relative size of the parameter were visually represented in the following plot.
+     </p>
+       <img id="scored" src="/static/reg_ridge_bar.png" alt="ridge model parameters" style="width:60%" class="center">
+     <p>
+     Finally lasso Regression was explored. The hyperparameter alpha was tested with grid search cross validation in the range of 1e-5 to 90. The optimal alpha value was then used to train the model.
+       the mean squared error on the test set was 1.195466032036714. Though the model performance was similar to Ridge Regression, this model removed 3 features from the model. This is advantageous as less data must be collected for new predictions.
+       The relative size of the parameter were visually represented in the following plot.
+     </p>
+       <img id="scored2" src="/static/reg_lasso_bar.png" alt="ridge model parameters" style="width:60%" class="center">
+
+
+       <h3>Source Code:</h3>
+       <p> <a href="https://github.com/n-rasmussen/Machine-Learning-Models/blob/main/Regression_and_Regularization.ipynb" style="color:black; text-decoration:underline;">Github Repository</a> </p>
+
+   </div>
+
+ {% endblock %}

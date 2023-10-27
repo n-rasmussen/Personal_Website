@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="projects">
+    <h2>Here are some projects I have works on.</h2>
+    <h3><a href="{{ url_for('game') }}" style="color:black;"> Game using PyGame</a></h3>
+    <h3><a href="{{ url_for('knn') }}" style="color:black;">Movie Recommender using KNN</a></h3>
+    <h3><a href="{{ url_for('regression') }}" style="color:black;">Movie Rating Predictor using Regularized Regression </a></h3>
+     <h3><a href="{{ url_for('MNIST_CNN') }}" style="color:black;">Convolutional Neural Network on MNIST </a></h3>
+  </div>
+
+{% endblock %}

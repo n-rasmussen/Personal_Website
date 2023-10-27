@@ -1,0 +1,195 @@
+{% extends "layout.html" %}
+{% block content %}
+   <div class="ConvNN_MNIST">
+     <h2>Convolutional Neural Network on MNIST using Keras</h2>
+     <p>In this project I will explore the MNIST dataset using a convolutional Neural Network and the Keras library in Tensorflow.
+       ConvNNs are a powerful tool for image recognition. In a fully connected (FC) model, there can quickly become a large number of parameters.
+       This can lead to high training costs, require lots of data, difficulties with optimization and overfitting. ConvNN can exploit the locality of data,
+       and translation invariance of image data to reduce the number of parameters needed. In this model I will use a 3x3 convolution over the 28x28 image.
+       This will be followed by flattening, a dense layer (with relu), and a final dense layer with a softmax activation function. <br> <br>
+       As the data is categorical by nature, sparse_categorical_crossentropy was selected as the loss function. the sparse option handles one-hot encoding of the batch within the loss method.
+     </p>
+
+<math display="block" class="tml-display" style="display:block math;">
+  <mrow>
+    <msub>
+      <mi>ℓ</mi>
+      <mi>w</mi>
+    </msub>
+    <mo form="prefix" stretchy="false">(</mo>
+    <msub>
+      <mi>x</mi>
+      <mi>i</mi>
+    </msub>
+    <mo separator="true">,</mo>
+    <msub>
+      <mi>y</mi>
+      <mi>i</mi>
+    </msub>
+    <mo form="postfix" stretchy="false">)</mo>
+    <mo>=</mo>
+    <mo>−</mo>
+    <mrow>
+      <munderover>
+        <mo movablelimits="false">∑</mo>
+        <mrow>
+          <mi>i</mi>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <mn>9</mn>
+      </munderover>
+    </mrow>
+    <msub>
+      <mi>y</mi>
+      <mi>i</mi>
+    </msub>
+    <mrow>
+      <mi>log</mi>
+      <mo>⁡</mo>
+    </mrow>
+    <mo form="prefix" stretchy="false">(</mo>
+    <msub>
+      <mover>
+        <mi>y</mi>
+        <mo stretchy="false" class="tml-xshift" style="math-style:normal;math-depth:0;">^</mo>
+      </mover>
+      <mi>i</mi>
+    </msub>
+    <mo form="postfix" stretchy="false">)</mo>
+  </mrow>
+</math>
+     <p>
+       For the model Optimizer, I show to go with adam. This is considered a good starting choice for deep learning optimization.
+       Adam incorporated both momentum and RMSProp (with bias correction) to enhance the learning rate of the model.
+       Momentum keeps memory of previous gradients which may help the solution approach a minimization quicker.
+     </p>
+     <math display="block" class="tml-display" style="display:block math;">
+  <mrow>
+    <msub>
+      <mi>v</mi>
+      <mi>t</mi>
+    </msub>
+    <mo>=</mo>
+    <mi>γ</mi>
+    <msub>
+      <mi>v</mi>
+      <mrow>
+        <mi>t</mi>
+        <mo>−</mo>
+        <mn>1</mn>
+      </mrow>
+    </msub>
+    <mo>+</mo>
+    <mo form="prefix" stretchy="false">(</mo>
+    <mn>1</mn>
+    <mo>−</mo>
+    <mi>γ</mi>
+    <mo form="postfix" stretchy="false">)</mo>
+    <mi>η</mi>
+  </mrow>
+</math>
+     <p>
+RMSProp on the other hand is an adaptive learning rate that reduces the learning rate if big updates are occurring to a parameter, and increase the learning rate if few updates are occurring.
+     </p>
+<math display="block" class="tml-display" style="display:block math;">
+  <mrow>
+    <msub>
+      <mi>θ</mi>
+      <mrow>
+        <mi>t</mi>
+        <mo separator="true">,</mo>
+        <mi>i</mi>
+      </mrow>
+    </msub>
+    <mo>=</mo>
+    <msub>
+      <mi>θ</mi>
+      <mrow>
+        <mi>t</mi>
+        <mo>−</mo>
+        <mn>1</mn>
+        <mo separator="true">,</mo>
+        <mi>i</mi>
+      </mrow>
+    </msub>
+    <mo>−</mo>
+    <mfrac>
+      <mi>η</mi>
+      <msqrt>
+        <mrow>
+          <msub>
+            <mi>G</mi>
+            <mrow>
+              <mi>t</mi>
+              <mo separator="true">,</mo>
+              <mi>i</mi>
+            </mrow>
+          </msub>
+          <mo>+</mo>
+          <mi>ϵ</mi>
+        </mrow>
+      </msqrt>
+    </mfrac>
+    <msub>
+      <mi>g</mi>
+      <mrow>
+        <mi>t</mi>
+        <mo separator="true">,</mo>
+        <mi>i</mi>
+      </mrow>
+    </msub>
+  </mrow>
+</math>
+
+     <math display="block" class="tml-display" style="display:block math;">
+  <mrow>
+    <msub>
+      <mi>G</mi>
+      <mi>t</mi>
+    </msub>
+    <mo separator="true">,</mo>
+    <mi>i</mi>
+    <mo>=</mo>
+    <mi>β</mi>
+    <msub>
+      <mi>G</mi>
+      <mrow>
+        <mi>t</mi>
+        <mo>−</mo>
+        <mn>1</mn>
+        <mo separator="true">,</mo>
+        <mi>i</mi>
+      </mrow>
+    </msub>
+    <mo>+</mo>
+    <mo form="prefix" stretchy="false">(</mo>
+    <mn>1</mn>
+    <mo>−</mo>
+    <mi>β</mi>
+    <mo form="postfix" stretchy="false">)</mo>
+    <msubsup>
+      <mi>g</mi>
+      <mrow>
+        <mi>t</mi>
+        <mo separator="true">,</mo>
+        <mi>i</mi>
+      </mrow>
+      <mn>2</mn>
+    </msubsup>
+  </mrow>
+</math>
+<p>
+  In this model I acheived an accuracy of 98.2% on the test set.
+</p>
+       <p> example of MNIST data set </p>
+       <img src="/static/MNIST_example.jpg" alt="MNIST Data" style="width:50%" class="center">
+       <p> Model </p>
+       <img src="/static/MNIST_Model.jpg" alt="Convolution Mdel" style="width:60%" class="center">
+
+       <h3>Source Code:</h3>
+       <p> <a href="https://github.com/n-rasmussen/Machine-Learning-Models/blob/main/CNN_on_MNIST.ipynb" style="color:black; text-decoration:underline;">Github Repository</a> </p>
+
+   </div>
+
+ {% endblock %}
