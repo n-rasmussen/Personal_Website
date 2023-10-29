@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+{% block content %}
+   <div class="Disaster_RNN">
+     <h2>NLP Sentiment Analysis With RNNs</h2>
+     <p>In this model I explore Natural Language Processing (NLP) with respect to sentiment analysis of tweets. The Kaggle Disaster Tweets dataset was used to build this model.
+The first step in this project is to clean the data and preprocess it for training. <br> <br> The training set had the following format:
+         </p>
+        <img src="/static/Disaster_RNN_training_set.jpg" alt="Training Data" style="width:60%" class="center">
+        <p>
+       The data provided includes keywords and location. This information was not relevant to the content
+       of the tweet so was removed from the data to reduced noise in the model leaving the text only. Looking through the data it can be seen that lots of special characters and
+       contractions are used in the tweets, this potentially may affect the accuracy of the model so were removed to standardize the text. <br> <br> Example of a non disaster tweet:
+             </p>
+       <img src="/static/non_disaster.jpg" alt="Non Disaster Tweet" style="width:40%" class="center">
+           <p>
+               Example of a  disaster tweet:
+         </p>
+<img src="/static/disaster.jpg" alt="Disaster Tweet" style="width:40%" class="center">
+               <p>
+            Contractions were replaced with the full words they represent which was represented in a dictionary. Special characters were removed, and words put in lower case during the tokenization step.
+The text was tokenized using the keras TextVectorization class. Words were split by whitespace and the output vectors were padded so all feature vectors were of the same length.
+       Integer encoding was used for the word representation. the vectorization was fit to the training set to build the vocabulary for the tokenization. <br>  <br> Example of tokenized tweet:
+       </p>
+       <img src="/static/Tokenized.jpg" alt="Tokenized Tweet" style="width:50%" class="center">
+           <p>
+Next the model was built. For this problem a recurrent neural network was used as they are well suited for NLP due to the preservation of the relative position of words.
+First an Embedding Layer was used with an input size of vocabulary + 1 and an output dimension of 32. The output from the tokenization is a numerical representation of the vocabulary.
+       In order to learn the relationship between words the tokenized words (numbers) can be mapped into a vector space where the model can learn relationships between words.
+       The vector space should be large enough to avoid data loss from compressing the unique tokens to the vector representations, however too large a vector space can lead to
+       overfitting the embedding parameters to the inputs. Additionally, a higher dimension embedding will significantly increase model complexity and the number of trainable parameters.
+       Additionaly L2 regularization was applied to this layer, so no embedding vector parameter became too large which would have lead to overfitting in the model, L1 regularization can have the
+       unattended effect of setting a parameter to zero which may affect the model's performance.
+The second layer in the model is a bidirectional LSTM (long short-term memory). This RNN layer is relatively insensitive to gap length, and is suited for sequential data like text.
+       The advantage of RNN is that it can carry forward information from previous time-steps (or words in the case of NLP) helping to preserve context. Other RNN structure suffer
+       from loosing context with longer distances between relevant words, LSTM attempts to overcome this issue. LSTM have three main gates, a forget gate layer which decided what
+       information to discard from the current cell state. The input gate decided which values in the cell state to update, and finally a activation function to decide what the
+       new information should be. For this model a bidirectional implementation was selected as processing the text in both directions may help to understand the relationship between words better.
+       Dropout of 0.5 was chosen for the layer to help prevent overfitting to parameters.
+     </p>
+       <img src="/static/LSTM.jpg" alt="Example of an LSTM Node" style="width:50%" class="center">
+       <p> The final layer in the model is a fully connected (FC) output layer (Dense) of 1 cell with a sigmoid activation.
+           This was selected as this is a binary classification problem, so the model output should be 1 or 0.
+Adam was the selected optimization algorithim, and the loss was selected to be binary crossentropy. the model had a maxinium accuracy at the second epoch of 79.8%. </p>
+
+       <img src="/static/Disaster_training_graph.jpg" alt="Accuracy Over Training Epochs" style="width:40%" class="center">
+
+       <p> Summary of Model parameter Space: </p>
+
+   <img src="/static/Model_summary.jpg" alt="Accuracy Over Training Epochs" style="width:40%" class="center">
+       <h3>Source Code:</h3>
+       <p> <a href="https://github.com/n-rasmussen/Machine-Learning-Models/blob/main/Disaster_Tweets.ipynb" style="color:black; text-decoration:underline;">Github Repository</a> </p>
+
+   </div>
+
+ {% endblock %}

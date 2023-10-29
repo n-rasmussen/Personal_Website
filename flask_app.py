@@ -36,5 +36,10 @@ def MNIST_CNN():
 def resume():
 	return render_template('resume.html')
 
+@app.route('/projects/Disaster_RNN/')
+def Disaster_RNN():
+	return render_template('Disaster_RNN.html')
+
+
 if __name__ == '__main__':
 	app.run(debug=True)
